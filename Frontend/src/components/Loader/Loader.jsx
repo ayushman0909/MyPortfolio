@@ -1,10 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 
-const Loader = ({ loading }) => {
+const Loader = ({ loading,onEnter  }) => {
   return (
     <AnimatePresence>
       {loading && (
-        <motion.div
+        <motion.div 
+        onClick={onEnter}
           className="fixed inset-0 z-9999 flex items-center justify-center bg-[#0F172A]"
           initial={{ opacity: 1 }}
           exit={{
@@ -15,7 +16,6 @@ const Loader = ({ loading }) => {
           }}
         >
           <div className="relative">
-
             {/* Outer Ring */}
 
             <motion.div
@@ -43,8 +43,20 @@ const Loader = ({ loading }) => {
             <h2 className="absolute inset-0 flex items-center justify-center font-bold text-xl">
               AV
             </h2>
-
           </div>
+          <motion.p
+            className="absolute bottom-24 left-1/2 -translate-x-1/2 text-gray-300 text-lg font-medium tracking-widest"
+            animate={{
+              opacity: [0.2, 1, 0.2],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            Click Anywhere to Enter
+          </motion.p>
         </motion.div>
       )}
     </AnimatePresence>

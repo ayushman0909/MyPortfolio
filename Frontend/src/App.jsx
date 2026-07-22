@@ -14,9 +14,12 @@ import Timeline from "./components/Timeline/Timeline";
 import Testimonials from "./components/Testimonials/Testimonials";
 import Contact from "./components/Contact/Contact";
 import Footer from "./components/Footer/Footer";
+import { useRef } from "react";
+
+import startupSound from "./assets/sounds/aistartup.mp3";
+
 
 function App() {
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,13 +33,30 @@ function App() {
     return () => clearTimeout(timer);
 
   }, []);
+ 
+  const audioRef = useRef(new Audio(startupSound));
+
+useEffect(() => {
+  audioRef.current.volume = 0.5;
+}, []);
+
+const handleEnter = async () => {
+  try {
+    audioRef.current.currentTime = 0;
+    await audioRef.current.play();
+
+    setLoading(false);
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   return (
     <>
-      <Loader loading={loading} />
+      <Loader loading={loading}  onEnter={handleEnter} />
 
       {!loading && (
-        <>
+        <div>
          {/* <Cursor /> */}
         <ScrollProgress />
           <Navbar />
@@ -50,7 +70,7 @@ function App() {
             <Testimonials/>
             <Contact/>
             <Footer/>
-        </>
+        </div>
       )}
     </>
   );
