@@ -69,6 +69,6 @@ export const projects = [
       "Task management application with local storage and filtering.",
     technologies: ["React", "Tailwind"],
     github: "#",
-    live: "react-full-course-1umg1y8wn-ayushmans-projects-2cb5296a.vercel.app",
+    live: "https://react-full-course-peach.vercel.app",
   },
 ];
